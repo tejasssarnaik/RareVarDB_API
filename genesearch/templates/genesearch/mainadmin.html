@@ -1,0 +1,414 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>RareVarDb - Dashboard</title>
+    <link rel="icon" href="{% static 'img/mutation.png' %}" type="image/x-icon">
+    <!-- js link -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <!-- css link -->
+    <link href="{% static 'css/stylee.css' %}" rel="stylesheet" />
+    <!-- fontawesome link -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- javascript link -->
+    <script src="{% static 'js/admin_tab.js' %}"></script>
+
+
+
+    <style>
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            /* border: 1px solid #ccc; */
+            /* background-color: #f1f1f1; */
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            color: white;
+            background-color: rgba(var(--bs-primary-rgb),
+                    var(--bs-bg-opacity)) !important;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding-left: 90px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            color: white;
+        }
+
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            /* border: 1px solid #ccc; */
+            border-top: none;
+        }
+
+        .sb-topnav .navbar-brand {
+            width: 158px;
+            margin: 1%;
+        }
+
+        .sb-nav-fixed {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+        }
+
+        .sb-topnav {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+            padding-left: 0;
+            height: 65px !important;
+            z-index: 1039;
+        }
+
+        #layoutAuthentication {
+            display: flex;
+            flex-direction: column;
+            min-height: 91.18vh;
+        }
+
+        #layoutAuthentication_footer {
+            /* position: fixed; */
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            min-width: 0;
+            filter: drop-shadow(0 -4px 6px rgba(0, 0, 0, 0.2));
+        }
+
+        .card-body {
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
+
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-lg order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Brand-->
+        <img src="https://rarevardb.genespectrum.in/images/RareVarDB_new-PhotoRoom.png-PhotoRoom-1.png" class="img-fluid navbar-brand" height="80px"
+            width="200px" alt="" srcset="">
+    </nav>
+    <div id="layoutSidenav">
+        <!-- sidebar start -->
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="./admin.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Interface</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                            aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Profile
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                    aria-controls="pagesCollapseAuth">
+                                    Authentication
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="register.php">Register</a>
+                                        <a class="nav-link" href="forget_password.php">Forgot Password</a>
+                                    </nav>
+                                </div>
+
+                            </nav>
+                        </div>
+                        <div class="sb-sidenav-menu-heading">Database</div>
+                        <nav>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseError" aria-expanded="false"
+                                aria-controls="pagesCollapseError">
+                                Dashboard
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="dashboard_user.php">Admin panel User List</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                aria-controls="pagesCollapseAuth">
+                                Truncate
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="truncate_table.php">Clear table</a>
+                                    <!-- <a class="nav-link" href="password.php">Forgot Password</a> -->
+                                </nav>
+                            </div>
+
+                            <div class="sb-sidenav-menu-heading">Sign-off</div>
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="admin_logout.php">Logout</a>
+                            </nav>
+                        </nav>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div> ADMIN
+                </div>
+            </nav>
+        </div>
+        <!-- sidebar end -->
+        <div id="layoutSidenav_content">
+            <!-- dashboard start -->
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Welcome</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">Variant</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="tab bg-primary">
+                                        <button class="tablinks" onclick="openCity(event, 'London')">View
+                                            Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">Disease</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="tab bg-primary">
+                                        <button class="tablinks" onclick="openCity(event, 'Paris')">View
+                                            Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">OMIM</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="tab bg-primary">
+                                        <button class="tablinks" onclick="openCity(event, 'OMIM')">View
+                                            Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">Registered Users</div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="tab bg-primary">
+                                        <button class="tablinks" onclick="openCity(event, 'Tokyo')">View
+                                            Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- cards start  -->
+            <div class="container">
+                <!-- ## Variant Details ## -->
+                <div id="London" class="tabcontent">
+
+                    <h3>Variant Details</h3>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./variant_add_table.php">
+                                    <div class="card-body">Add data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./variant_delete_table.php">
+                                    <div class="card-body">Delete data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="variant_update_table.php">
+                                    <div class="card-body">Update data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./variant_table_upload_new.php">
+                                    <div class="card-body">Upload data in bulk</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ## Disease Details ## -->
+                <div id="Paris" class="tabcontent">
+                    <h3>Disease Details</h3>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./disease_add_table.php">
+                                    <div class="card-body">Add data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./disease_delete_table.php">
+                                    <div class="card-body">Delete data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="disease_update_table.php">
+                                    <div class="card-body">Update data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./disease_table_upload.php">
+                                    <div class="card-body">Upload data in bulk</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ## OMIM Details ## -->
+                <div id="OMIM" class="tabcontent">
+
+                    <h3>OMIM Details</h3>
+                    <div class="row">
+                       
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./omim_truncate.php">
+                                    <div class="card-body">Truncate data</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./omim_table_upload.php">
+                                    <div class="card-body">Upload data in bulk</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ##Registered User Details ## -->
+                <div id="Tokyo" class="tabcontent">
+                    <h3>Registered User Details</h3>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <a href="./register_user_table.php">
+                                    <div class="card-body">View table</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- cards end -->
+
+            <!-- dashboard end   -->
+
+            <!--  footer start-->
+            <div id="layoutAuthentication_footer">
+                <footer class="py-2 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <!-- <div class="text-muted">Copyright &copy; Your Website 2023</div> -->
+                            <a target="_blank" href="https://genespectrum.in/"> <img src="https://rarevardb.genespectrum.in/images/Logo_rework.png"
+                                    class=" d-flex align-items-center justify-content-center  link-body-emphasis text-decoration-none"
+                                    height="40px" width="150px" alt="" srcset="" style="margin-left: 10%;"> </a>
+                            <div>
+                                <ul class="nav justify-content-end">
+                                    <a class="nav-item" href="tel:917021386045" style="padding: 0px 6px 0px 0px;">+91
+                                        7021386045</a> |
+                                    <a class="nav-item " href="mailto:rarevardb@genespectrum.in"
+                                        style="padding: 0px 0px 0px 6px;"> rarevardb@genespectrum.in</a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- footer end -->
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+    crossorigin="anonymous"></script>
+<script src="js/datatables-simple-demo.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+
+        // Toggle the side navigation
+        const sidebarToggle = document.body.querySelector('#sidebarToggle');
+        if (sidebarToggle) {
+            // Uncomment Below to persist sidebar toggle between refreshes
+            // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+            //     document.body.classList.toggle('sb-sidenav-toggled');
+            // }
+            sidebarToggle.addEventListener('click', event => {
+                event.preventDefault();
+                document.body.classList.toggle('sb-sidenav-toggled');
+                localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+            });
+        }
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RareVarDB</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <!-- MDB CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container" style="background-color: azure;">
+        <a class="navbar-brand" href="#">
+            <img src="https://genespectrum.in/wp-content/uploads/2022/11/cropped-Untitled-design-300x88.png" alt="GeneSpectrum" height="60px">
+        </a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="/searchapi/" class="nav-link">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        Search by API
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/searchdatabase/" class="nav-link">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        Search by Database
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="/" class="nav-link">
+                    <button type="button" class="btn btn-primary btn-lg">
+                        Logout
+                    </button>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- About RareVarDB Section -->
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1>About RareVarDB</h1>
+        </div>
+        <div class="card-body">
+            <p>
+                RareVarDB is a database designed by GeneSpectrum Life Sciences to provide researchers, clinicians, and geneticists with easy access to rare genetic disease variants. This comprehensive platform serves as a one-stop resource, offering in-depth information and variant annotations for a wide range of rare diseases. RareVarDB encompasses a collection of rare genetic diseases, with information on over 700 rare genetic diseases, 1200 genes, and 50000 variants.
+            </p>
+            <p>Key Features of RareVarDB:</p>
+            <ul>
+                <li>Extensive Rare Disease Variant Collection</li>
+                <li>Disease and Variant Annotation</li>
+                <li>Flexible Search Options</li>
+                <li>Integration of Variant Annotations</li>
+            </ul>
+            <p><strong>Research use only. For feedback, write to us at rarevardb@genespectrum.in.</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- Live Counter Section -->
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body bg-primary text-white">
+                    <img src="https://rarevardb.genespectrum.in/images/gene%20logo%20new%203.png" alt="Genes" class="live-score-image" style="height: 50px;">
+                    <h2 class="counter" id="count2">1203</h2>
+                    <h4 class="counter-box-heading">Genes</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body bg-primary text-white">
+                    <img src="https://rarevardb.genespectrum.in/images/disease%20logo%20new%203.png" alt="Diseases" class="live-score-image" style="height: 50px;">
+                    <h2 class="counter" id="count1">758</h2>
+                    <h4 class="counter-box-heading">Diseases</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body bg-primary text-white">
+                    <img src="https://rarevardb.genespectrum.in/images/variant%20new%20logo%201.png" alt="Variants" class="live-score-image" style="height: 50px;">
+                    <h2 class="counter" id="count3">58200</h2>
+                    <h4 class="counter-box-heading">Variants</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="footer bg-light mt-4">
+    <div class="container" style="background-color: azure;" >
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-4">
+                <a href="https://genespectrum.in/" target="_blank">
+                    <img src="https://rarevardb.genespectrum.in/images/Logo_rework.png" height="40px" width="150px" alt="GeneSpectrum">
+                </a>
+            </div>
+            <div class="col-md-4 text-center">
+                <!-- Social Media Icons -->
+                <div class="footer-icons">
+                    <a class="btn btn-link btn-floating btn-lg text-dark" href="https://www.facebook.com/genespectrum" target="_blank" role="button" data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn-link btn-floating btn-lg text-dark" href="https://twitter.com/genespectrum" target="_blank" role="button" data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-dark" href="https://www.instagram.com/genespectrum/" target="_blank" role="button" data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-dark" href="https://www.linkedin.com/company/genespectrum" target="_blank" role="button" data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4 text-end">
+                <a class="nav-item" href="tel:917021386045" style="padding: 0px 6px 0px 0px;">+91 7021386045</a>
+                <a class="nav-item" href="mailto:rarevardb@genespectrum.in" style="padding: 0px 0px 0px 6px;">rarevardb@genespectrum.in</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and custom script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF"></script>
+
+<script>
+      //diesase
+      // Get the count value from PHP
+      var count1 = 0;
+      var totalCount1 = 758;
+      // Function to update the count
+      function updateCount1() {
+          document.getElementById("count1").innerHTML = count1;
+
+          if (count1 < totalCount1) {
+              count1++;
+              setTimeout(updateCount1, 0.001);
+          }
+      }
+
+      // Start updating the count
+      updateCount1();
+
+      // genes
+      // Get the count value from PHP
+      var count2 = 0;
+      var totalCount2 = 1203;
+      // Function to update the count
+      function updateCount2() {
+          document.getElementById("count2").innerHTML = count2;
+
+          if (count2 < totalCount2) {
+              count2++;
+              setTimeout(updateCount2, 0.01);
+          }
+      }
+      // Start updating the count
+      updateCount2();
+
+      // variant
+      // Get the count value from PHP
+      var count3 = 0;
+      var totalCount3 = 58200;
+      // Function to update the count
+      function updateCount3() {
+          document.getElementById("count3").innerHTML = count3;
+
+          if (count3 < totalCount3) {
+              count3 = 100 + count3;
+              // count3++;
+              setTimeout(updateCount3, 0.01);
+          }
+      }
+      // Start updating the count
+      updateCount3();
+</script>
+<script>
+  const btn = document.getElementById('btn');
+  btn.addEventListener('click', function onClick() {
+      btn.style.backgroundColor = 'salmon';
+      btn.style.color = 'white';
+  });
+</script>
+
+
+
+
+</body>
+</html>

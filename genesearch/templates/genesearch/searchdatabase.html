@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>search by database</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+
+</head>
+
+<body>
+    <nav class="navbar py-0 navbar-expand-lg navbar-box">
+        <div class="container-fluid" style="background-color: azure;">
+            <img src="https://genespectrum.in/wp-content/uploads/2022/11/cropped-Untitled-design-300x88.png"
+                class="img-fluid navbar-brand" height="80px" width="200px" alt="" srcset="">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-0  " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+
+                    <li class="nav-item">
+                        <a href="/loginIN/" class="nav-link">
+                            <button type="button" class="btn btn-primary btn-lg">
+                                Home
+                            </button>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="/" class="nav-link">
+                            <button type="button" class="btn btn-primary btn-lg">
+                                Logout
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+        }
+    </style>
+
+    <div class="container">
+
+
+        <form action="" method="get">
+            <div class="form-group" style="display: flex; align-items: center;">
+                <label for="genes_name" style="margin-right: 10px;">Gene Name:</label>
+                <input type="text" name="genes_name" class="form-control" placeholder="Enter Gene Name">
+            </div>
+            <div class="form-group" style="display: flex; align-items: center;">
+                <label for="disease" style="margin-right: 10px;">Disease Name:</label>
+                <input type="text" name="disease" class="form-control" style="margin-right: 10px;"
+                    placeholder="Enter Disease">
+            </div>
+            <div class="form-group" style="display: flex; align-items: center;">
+                <label for="position" style="margin-right: 10px;">Position:</label>
+                <input type="text" name="position" class="form-control" placeholder="Enter Position Value">
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit">Execute</button>
+            </div>
+        </form>
+        <hr>
+    </div>
+
+
+    <div class="container mt-4">
+        {% if genes_name or disease or position %}
+        <h5 class="mb-3">Search Results:</h5>
+        <div class="result-card card bg-light" style="max-width: 200px;">
+            <div class="card-body p-2">
+                <ul class="list-group list-group-flush">
+                    {% if genes_name %}
+                    <li class="list-group-item p-2">
+                        <span class="fw-bold">Gene Name:</span> {{ genes_name }}
+                    </li>
+                    {% endif %}
+                    {% if disease %}
+                    <li class="list-group-item p-2">
+                        <span class="fw-bold">Disease Name:</span> {{ disease }}
+                    </li>
+                    {% endif %}
+                    {% if position %}
+                    <li class="list-group-item p-2">
+                        <span class="fw-bold">Position Value:</span> {{ position }}
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    </div>
+
+    <style>
+        /* Style to make the table fit within 100% width and wrap text */
+        .table {
+            width: 100%;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        .table th,
+        .table td {
+            white-space: normal;
+        }
+
+        #data-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #data-table th,
+        #data-table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #data-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* General styling for the table */
+        .table-container {
+            margin: 20px;
+            overflow-x: auto;
+        }
+
+        #data-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #data-table th,
+        #data-table td {
+            border: 1px solid #dddddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        #data-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Highlight style */
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        /* Add a subtle box shadow for a card-like effect */
+        .table-container {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Add some spacing between cells */
+        #data-table td {
+            padding: 12px;
+        }
+
+        /* Add hover effect for better interaction */
+        #data-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+
+
+
+    <br><br><br>
+
+
+    {% if data %}
+    <div id="tabs">
+        <ul>
+            <li><a href="#Disease">ANNOTATION</a></li>
+            <li><a href="#Variant">VARIANT</a></li>
+        </ul>
+
+
+        <!-- Content for the "Disease" tab -->
+        <div id="Disease">
+            <table id="diseaseTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>variant_id</th>
+                        <th>disease</th>
+                        <th>genes</th>
+                        <th>genes_id</th>
+                        <th>variant</th>
+                        <th>clinvar_id</th>
+                        <th>chr</th>
+                        <th>position</th>
+                        <th>ref_allle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for variant in data %}
+                    <tr>
+                        <td>{{ variant.variant_id }}</td>
+                        <td>{{ variant.disease }}</td>
+                        <!-- <td>{{ variant.genes }}</td> -->
+                        <td>
+                            {% if variant.genes %}
+                            <span class="gene-link">{{ variant.genes }}</span>
+                            {% else %}
+                            {{ variant.genes }}
+                            {% endif %}
+                        </td>
+                        <td>{{ variant.genes_id }}</td>
+                        <!-- <td>{{ variant.variant }}</td> -->
+                        <td>
+                            {% if variant.variant != 'NA' and variant.variant %}
+                            <a href="https://www.ncbi.nlm.nih.gov/snp?term={{ variant.variant }}" target="_blank"
+                                style="color: blue;">{{ variant.variant }}</a>
+                            {% else %}
+                            {{ variant.variant }}
+                            {% endif %}
+                        </td>
+                        <td>{{ variant.clinvar_id }}</td>
+                        <td>{{ variant.chr }}</td>
+                        <td>{{ variant.position }}</td>
+                        <td>{{ variant.ref_allle }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Content for the "VARIANT" tab -->
+        <div id="Variant">
+            <table id="variantTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>alt_allel</th> <!-- Fixed the typo here -->
+                        <th>af</th>
+                        <th>clinical_significance</th>
+                        <!-- Add other headers as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for variant in data %}
+                    <tr>
+                        <td>{{ variant.alt_allel }}</td> <!-- Fixed the typo here -->
+                        <td>{{ variant.af }}</td>
+                        <!-- <td>{{ variant.clinical_significance }}</td> -->
+                        <td>
+                            {% if variant.clinical_significance %}
+                            <a href="https://www.ncbi.nlm.nih.gov/gene/?term={{ variant.clinical_significance }}"
+                                target="_blank" style="color: blue;">{{ variant.clinical_significance }}</a>
+                            {% else %}
+                            {{ variant.clinical_significance }}
+                            {% endif %}
+                        </td>
+                        <!-- Add other data fields as needed -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        /* Add styling for DataTables */
+        #diseaseTable_wrapper,
+        #variantTable_wrapper {
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            // DataTable initialization for Disease table
+            var diseaseTable = $('#diseaseTable').DataTable();
+
+            // DataTable initialization for Variant table
+            var variantTable = $('#variantTable').DataTable();
+
+            // Search functionality for Disease table
+            $('#searchInputDisease').on('keyup', function () {
+                diseaseTable.search(this.value).draw();
+            });
+
+            // Search functionality for Variant table
+            $('#searchInputVariant').on('keyup', function () {
+                variantTable.search(this.value).draw();
+            });
+        });
+    </script>
+
+    <!-- ... Other parts of your code ... -->
+    {% else %}
+    <p>No matching data found.</p>
+    {% endif %}
+
+    </div>
+
+    <script>
+        $(function () {
+            // Activate tabs
+            $("#tabs").tabs();
+
+            // Button click event handlers
+            $("#showJsonButton").click(function () {
+                $("#tableData").hide();
+                $("#jsonData").show();
+            });
+
+            $("#showTableButton").click(function () {
+                $("#jsonData").hide();
+                $("#tableData").show();
+            });
+        });
+    </script>
+
+
+    <!-- Include your script to activate the tabs -->
+    <script>
+        $(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+
+
+
+
+
+    <!-- Footer Section -->
+    <footer>
+        <div style="background-color: azure;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 1;">
+                    <a href="https://genespectrum.in/" target="_blank">
+                        <img src="https://rarevardb.genespectrum.in/images/Logo_rework.png" height="40px" width="150px"
+                            alt="GeneSpectrum" style="border: none;" />
+                    </a>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <!-- Social Media Icons -->
+                    <div style="display: flex; justify-content: center;">
+                        <a href="https://www.facebook.com/genespectrum" target="_blank"
+                            style="text-decoration: none; color: black; padding: 5px;" role="button"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/genespectrum" target="_blank"
+                            style="text-decoration: none; color: black; padding: 5px;" role="button"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/genespectrum/" target="_blank"
+                            style="text-decoration: none; color: black; padding: 5px;" role="button"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/genespectrum" target="_blank"
+                            style="text-decoration: none; color: black; padding: 5px;" role="button"><i
+                                class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div style="flex: 1; text-align: end;">
+                    <a href="tel:917021386045" style="text-decoration: none; color: black; padding: 5px;">+91
+                        7021386045</a>
+                    <a href="mailto:rarevardb@genespectrum.in"
+                        style="text-decoration: none; color: black; padding: 5px;">rarevardb@genespectrum.in</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
